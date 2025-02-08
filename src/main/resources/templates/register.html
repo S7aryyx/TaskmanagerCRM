@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Регистрация</h1>
+    <form id="registerForm">
+        <input type="text" id="username" placeholder="Имя пользователя" required>
+        <input type="password" id="password" placeholder="Пароль" required>
+        <button type="submit" class="btn">Зарегистрироваться</button>
+    </form>
+    <p>Уже есть аккаунт? <a href="/login">Войти</a></p>
+</div>
+<div id="alertBox" class="alert"></div>
+<script>
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value;
+        try {
+            const response = await fetch('/api/auth/signup', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ username, password })
+            });
+            const data = await response.text();
+            // Показываем уведомление в блоке alertBox
+            const alertBox = document.getElementById('alertBox');
+            alertBox.innerText = data;
+            alertBox.className = 'alert success';
+            alertBox.style.display = 'block';
+            setTimeout(() => { alertBox.style.display = 'none'; }, 3000);
+            window.location.href = '/login';
+        } catch (error) {
+            console.error("Ошибка регистрации:", error);
+            const alertBox = document.getElementById('alertBox');
+            alertBox.innerText = "Ошибка при регистрации!";
+            alertBox.className = 'alert error';
+            alertBox.style.display = 'block';
+            setTimeout(() => { alertBox.style.display = 'none'; }, 3000);
+        }
+    });
+</script>
+<footer>
+    <p>&copy; 2025 Task Manager</p>
+</footer>
+</body>
+</html>

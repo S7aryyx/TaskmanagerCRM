@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Панель администратора</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <script src="/js/admin.js" defer></script>
+</head>
+<body>
+<div class="container">
+  <h2>Панель администратора</h2>
+
+  <div>
+    <label>Имя пользователя:
+      <input type="text" id="username" placeholder="Введите имя пользователя">
+    </label>
+    <button onclick="loadTasks()">Загрузить задачи пользователя</button>
+    <button onclick="loadAllTasks()">Показать все задачи</button>
+  </div>
+
+  <!-- Блок для подсчёта задач по статусам -->
+  <div id="statusCounts"></div>
+
+  <h3>Список задач</h3>
+  <table>
+    <thead>
+    <tr>
+      <th>Заголовок</th>
+      <th>Описание</th>
+      <th>Статус</th>
+      <th>Дедлайн</th>
+      <th>Владелец</th>
+      <th>Действия</th>
+    </tr>
+    </thead>
+    <tbody id="taskTable"></tbody>
+  </table>
+
+  <!-- Модальное окно для редактирования задачи -->
+  <div id="editTaskModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeEditForm()">&times;</span>
+      <h3>Редактирование задачи</h3>
+      <input type="hidden" id="editTaskId">
+      <label>Заголовок: <input type="text" id="editTitle"></label><br>
+      <label>Описание: <input type="text" id="editDescription"></label><br>
+      <label>Статус:
+        <select id="editStatus">
+          <option value="NEW">Новая</option>
+          <option value="IN_PROGRESS">В процессе</option>
+          <option value="COMPLETED">Завершена</option>
+          <option value="OVERDUE">ПРОСРОЧЕННЫЕ</option>
+        </select>
+      </label><br>
+      <label>Дедлайн: <input type="datetime-local" id="editDeadline"></label><br>
+      <button onclick="updateTask()">Сохранить</button>
+      <button onclick="closeEditForm()">Отмена</button>
+    </div>
+  </div>
+
+  <!-- Форма добавления новой задачи -->
+  <div id="addTaskForm">
+    <h3>Добавить новую задачу</h3>
+    <!-- При добавлении задачи используется поле "username" для указания целевого пользователя -->
+    <label>Заголовок: <input type="text" id="newTitle"></label><br>
+    <label>Описание: <input type="text" id="newDescription"></label><br>
+    <label>Статус:
+      <select id="newStatus">
+        <option value="NEW">Новая</option>
+        <option value="IN_PROGRESS">В процессе</option>
+        <option value="COMPLETED">Завершена</option>
+        <option value="OVERDUE">ПРОСРОЧЕННЫЕ</option>
+      </select>
+    </label><br>
+    <label>Дедлайн: <input type="datetime-local" id="newDeadline"></label><br>
+    <button onclick="addTask()">Добавить задачу</button>
+  </div>
+
+  <!-- Блок для уведомлений -->
+  <div id="alertBox" class="alert"></div>
+</div>
+</body>
+</html>

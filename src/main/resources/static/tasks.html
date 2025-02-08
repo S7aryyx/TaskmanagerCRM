@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Задачи</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<section id="task-actions">
+    <button id="export-csv">Экспорт в CSV</button>
+    <button id="export-pdf">Экспорт в PDF</button>
+</section>
+
+<!-- Заголовок -->
+<header>
+    <h1>Задачи</h1>
+    <div>
+        <button id="logout-btn">Выйти</button>
+    </div>
+</header>
+
+<!-- Форма добавления задачи -->
+<section id="add-task">
+    <h2>Добавить задачу</h2>
+    <form id="task-form">
+        <input type="text" id="title" placeholder="Заголовок" required>
+        <textarea id="description" placeholder="Описание" required></textarea>
+        <input type="datetime-local" id="deadline" required>
+        <button type="submit">Добавить задачу</button>
+    </form>
+</section>
+
+<!-- Форма фильтрации задач -->
+<section id="task-filter">
+    <h2>Фильтрация задач</h2>
+    <div>
+        <label for="status-filter">Фильтровать по статусу:</label>
+        <select id="status-filter">
+            <option value="">Все</option>
+            <option value="NEW">Новая</option>
+            <option value="IN_PROGRESS">В процессе</option>
+            <option value="COMPLETED">Завершена</option>
+            <option value="OVERDUE">ПРОСРОЧЕННЫЕ</option>
+        </select>
+    </div>
+    <div id="task-count">Задачи: 0</div>
+</section>
+
+<!-- Список задач -->
+<section id="task-list">
+    <h2>Список задач</h2>
+    <div id="taskList"></div>
+</section>
+
+<!-- Форма редактирования задачи -->
+<section id="edit-task" style="display:none;">
+    <h2>Редактировать задачу</h2>
+    <form id="edit-task-form">
+        <input type="text" id="edit-title" placeholder="Заголовок" required>
+        <textarea id="edit-description" placeholder="Описание" required></textarea>
+        <input type="datetime-local" id="edit-deadline" required>
+        <select id="edit-status">
+            <option value="NEW">Новая</option>
+            <option value="IN_PROGRESS">В процессе</option>
+            <option value="COMPLETED">Завершена</option>
+            <option value="OVERDUE">ПРОСРОЧЕННЫЕ</option>
+        </select>
+        <button type="submit">Сохранить изменения</button>
+        <button type="button" id="cancel-edit">Отмена</button>
+    </form>
+</section>
+
+<script src="js/tasks.js"></script>
+
+</body>
+</html>
